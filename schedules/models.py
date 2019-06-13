@@ -20,7 +20,7 @@ class Schedule(models.Model):
     #    '6': _(u'Saturday'),
     #    '7': _(u'Sunday'),
     # }
-    DAYS_OF_WEEK = (
+    DAYS_OF_WEEK = [
         (0, 'Lunes'),
         (1, 'Martes'),
         (2, 'Miércoles'),
@@ -28,7 +28,7 @@ class Schedule(models.Model):
         (4, 'Viernes'),
         (5, 'Sábado'),
         (6, 'Domingo'),
-    )
+    ]
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_time = models.TimeField()
     duration = models.DurationField(default=timedelta(minutes=60))

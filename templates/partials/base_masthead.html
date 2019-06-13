@@ -8,9 +8,11 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <img src="{% static 'brand.jpg' %}" class="logo" alt="" height="48"/>
+        <img src="{% static 'brand.jpg' %}" class="logo" alt="Catequesis Las Tablas" height="48"/>
       </a>
     </div>
+
+
     <div class="collapse navbar-collapse navbar-collapse-1">
       <ul class="nav navbar-nav navbar-utility">
         <li>
@@ -23,6 +25,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="pficon pficon-user"></span>
             <! %= user_signed_in? ? current_user.first_name : t(".not_identified") %>
+            Placeholder user name
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -51,17 +54,18 @@
   
             <li class="divider"></li>
             <li>
-              <!%= link_to about_path do %>
-                  <div class="fa fa-question-circle-o">
-                    About
-                    <!%= (t '.about')  %>
-                  </div>
-              <! end %>
+              <a href="{% url 'about' %}" class="fa fa-question-circle-o"> About</a>
             </li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-primary">
+        {% if True %}
+        <li>
+            <a href="{% url 'schedules_index' %}">Reservas</a>
+        </li>
+
+        {% endif %}
         <li>
           <!% if user_signed_in? %>
               <!%= link_to (t'.user_panel'), user_path(current_user) %>
