@@ -19,13 +19,26 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+
+# Is PRODUCTION set up in the environment?
+PRODUCTION = os.environ.get('PRODUCTION', False)
+
+# IF the environment variable is production, make sure that config is through environment variables and not by default,
+# Also disables debug by default
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8)_1*hifu2e2jo7_r5+%iwu_=*bwjo02r&ywo%8++%s776e7*a'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+if PRODUCTION:
+    DEBUG = os.environ.get('DEBUG', False)
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+else:
+    DEBUG = os.environ.get('DEBUG', True)
+    SECRET_KEY = os.environ.get('SECRET_KEY', '8)_1*hifu2e2jo7_r5+%iwu_=*bwjo02r&ywo%8++%s776e7*a')
+
+
+# Service will only be available internally, allow all hosts
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,8 +90,12 @@ WSGI_APPLICATION = 'openreservation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('POSTGRESQL_NAME', 'openreservation'),
+        'USER': os.environ.get('POSTGRESQL_USER', 'openreservation'),
+        'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', 'openreservation'),
+        'HOST': os.environ.get('POSTGRESQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('POSTGRESQL_PORT','5432'),
     }
 }
 
