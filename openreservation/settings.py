@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages',
-    'schedules'
+    'schedules',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ WSGI_APPLICATION = 'openreservation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRESQL_NAME', 'openreservation'),
+        'NAME': os.environ.get('POSTGRESQL_DATABASE', 'openreservation'),
         'USER': os.environ.get('POSTGRESQL_USER', 'openreservation'),
         'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', 'openreservation'),
         'HOST': os.environ.get('POSTGRESQL_HOST', '127.0.0.1'),
