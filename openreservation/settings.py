@@ -34,7 +34,8 @@ if PRODUCTION:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 else:
     DEBUG = os.environ.get('DEBUG', True)
-    SECRET_KEY = os.environ.get('SECRET_KEY', '8)_1*hifu2e2jo7_r5+%iwu_=*bwjo02r&ywo%8++%s776e7*a')
+    SECRET_KEY = os.environ.get(
+        'SECRET_KEY', '8)_1*hifu2e2jo7_r5+%iwu_=*bwjo02r&ywo%8++%s776e7*a')
 
 
 # Service will only be available internally, allow all hosts
@@ -97,7 +98,7 @@ DATABASES = {
         'USER': os.environ.get('POSTGRESQL_USER', 'openreservation'),
         'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', 'openreservation'),
         'HOST': os.environ.get('POSTGRESQL_HOST', '127.0.0.1'),
-        'PORT': os.environ.get('POSTGRESQL_PORT','5432'),
+        'PORT': os.environ.get('POSTGRESQL_PORT', '5432'),
     }
 }
 
@@ -145,3 +146,5 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+AUTH_USER_MODEL = "accounts.User"

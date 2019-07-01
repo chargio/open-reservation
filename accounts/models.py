@@ -1,3 +1,8 @@
-from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
+# Extended User so I can add telephone and offspring data
+
+
+class User(AbstractUser):
+    pass

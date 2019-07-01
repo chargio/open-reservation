@@ -24,33 +24,36 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="pficon pficon-user"></span>
-            <! %= user_signed_in? ? current_user.first_name : t(".not_identified") %>
-            Placeholder user name
+            {% if user.is_authenticated %}
+              {{ user.username }}
+            {% else %}
+              Usuario no autenticado
+            {% endif %}
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li>
-              <!%= link_to  new_user_session_path do %>
-                  <div class="fa fa-sign-in">
-                    Log in
-                  </div>
-              <!% end %>
-            </li>
-            <li>
+              {% if user.is_authenticated %}
+                <li><a class="fa fa-sign-out" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                <li><a class="fa fa-sign-out" href="{% url 'users/profile'%}?next={{request.path}}">Profile</a></li>
+                {% else %}
               <!%= link_to destroy_user_session_path, method: :delete do %>
-                  <div class="fa fa-sign-out">
-                    Log out
-                  </div>
-              <!% end %>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <!%= link_to new_user_registration_path do %>
-                  <div class="fa fa-user-plus">
-                    Sign up
-                  </div>
-              <!% end %>
-            </li>
+              <div class="fa fa-sign-out">
+                Log out
+              </div>
+          <!% end %>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <!%= link_to new_user_registration_path do %>
+              <div class="fa fa-user-plus">
+                Sign up
+              </div>
+          <!% end %>
+        </li>
+
+              {% endif %}
+
+
   
             <li class="divider"></li>
             <li>
@@ -85,17 +88,14 @@
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <!%= (t ".help") %>
-            Help
+              <a href="{% url 'help' %}">Ayuda</a>
             <b class="caret"></b>
             <ul class="dropdown-menu">
               <li>
-                <a href="{% url 'index' %}">Home</a>
-                <a href="{% url 'help' %}">Help</a>
-                <a href="{% url 'about' %}">About</a>
-                <!%= link_to (t '.help'), help_path %>
-                <!%= link_to (t '.info'), info_path %>
-                <!%= link_to (t '.about'), about_path %>
+                <a href="{% url 'index' %}">Principal</a>
+                <a href="{% url 'help' %}">Ayuda</a>
+
+                <a href="{% url 'about' %}">Acerca de</a>
               </li>
             </ul>
           </a>

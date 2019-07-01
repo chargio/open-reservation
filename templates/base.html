@@ -9,11 +9,12 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
   <!link rel="stylesheet" type="text/css" href="{% static 'css/patternfly-additions.min.css' %}" >
 
-  <title>{% block title %} Open Reservation {% endblock %}</title>
+  <title>{% block title %} Las Tablas {% endblock %}</title>
 </head>
 <body>
 
   {% include 'partials/base_masthead.html' %}
+  {% include 'partials/base_alerts.html' %}
 
   {% block content  %} Content {% endblock %}
 
