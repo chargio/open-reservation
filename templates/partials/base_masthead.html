@@ -16,10 +16,7 @@
     <div class="collapse navbar-collapse navbar-collapse-1">
       <ul class="nav navbar-nav navbar-utility">
         <li>
-          <a href="#">
-            <! %= user_signed_in? ? t(".signed_in"): t(".not_signed_in") %>
-
-          </a>
+          <a class="fa pficon-help" href="{%url 'help'%}"> Ayuda </a>
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -33,68 +30,42 @@
           </a>
           <ul class="dropdown-menu">
               {% if user.is_authenticated %}
+                <li><a class="fa fa-user" href="{% url 'user:profile'%}?next={{request.path}}">Profile</a></li>
+                <li class="divider"></li>
                 <li><a class="fa fa-sign-out" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-                <li><a class="fa fa-sign-out" href="{% url 'users/profile'%}?next={{request.path}}">Profile</a></li>
-                {% else %}
-              <!%= link_to destroy_user_session_path, method: :delete do %>
-              <div class="fa fa-sign-out">
-                Log out
-              </div>
-          <!% end %>
-        </li>
-        <li class="divider"></li>
-        <li>
-          <!%= link_to new_user_registration_path do %>
-              <div class="fa fa-user-plus">
-                Sign up
-              </div>
-          <!% end %>
-        </li>
-
+              {% else %}
+                <li><a class="fa fa-sign-in" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+                <li><a class='fa fa-user-plus' href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
               {% endif %}
-
-
-  
-            <li class="divider"></li>
-            <li>
-              <a href="{% url 'about' %}" class="fa fa-question-circle-o"> About</a>
-            </li>
+ 
+              <li class="divider"></li>
+              <li>
+                <a href="{% url 'about' %}" class="fa fa-question-circle-o"> About</a>
+              </li>
           </ul>
         </li>
       </ul>
+
+      <!-- Main header navigation elements --> 
       <ul class="nav navbar-nav navbar-primary">
-        {% if True %}
         <li>
             <a href="{% url 'schedules_index' %}">Reservas</a>
         </li>
-
-        {% endif %}
-        <li>
-          <!% if user_signed_in? %>
-              <!%= link_to (t'.user_panel'), user_path(current_user) %>
-          <!% else %>
-              <!%= link_to (t'.log_in'), new_user_session_path %>
-          <!% end %>
-        </li>
-        <li>
-          <!% if user_signed_in? %>
-              <!%= link_to t('.offsprings'), offsprings_path %>
-          <!% end %>
-        </li>
-        <li>
-          <!% if user_signed_in? %>
-              <!%= link_to t('.rooms'), rooms_path %>
-          <!% end %>
-        </li>
+        <!-- Add user link + Log in , and offsprings + assignments-->
+        <!-- Help drowpdown -->
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <a href="{% url 'help' %}">Ayuda</a>
+          <a href="#0" class="dropdown-toggle" data-toggle="dropdown">
+              Ayuda
             <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu">
               <li>
                 <a href="{% url 'index' %}">Principal</a>
+              </li>
+                <li>
                 <a href="{% url 'help' %}">Ayuda</a>
-
+              </li>
+              <li>
                 <a href="{% url 'about' %}">Acerca de</a>
               </li>
             </ul>
@@ -102,6 +73,4 @@
         </li>
       </ul>
     </div>
-  </nav>
-  
-  
+</nav>

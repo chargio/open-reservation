@@ -1,11 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 
-# Create your views here.
+
+# Login form
 
 def user_login(request):
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -16,13 +18,20 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse('Authenticated '\
+                return HttpResponse('Authenticated '
                                     'successfully')
             else:
                 return HttpResponse('Disabled account')
-    
+
         else:
             return HttpResponse('Invalid Login')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form': form})
+
+
+def profile_view(request):
+    if request.method == 'GET' and request.user.is_authenticated:
+        return render(request, 'accounts/profile.html', {'user': request.user})
+    else:
+        return redirect('help')
