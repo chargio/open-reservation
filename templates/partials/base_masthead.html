@@ -22,7 +22,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="pficon pficon-user"></span>
             {% if user.is_authenticated %}
-              {{ user.username }}
+              {{ user }}
             {% else %}
               Usuario no autenticado
             {% endif %}
@@ -32,10 +32,10 @@
               {% if user.is_authenticated %}
                 <li><a class="fa fa-user" href="{% url 'user:profile'%}?next={{request.path}}">Profile</a></li>
                 <li class="divider"></li>
-                <li><a class="fa fa-sign-out" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                <li><a class="fa fa-sign-out" href="{% url 'account_logout'%}?next={{request.path}}">Logout</a></li>
               {% else %}
-                <li><a class="fa fa-sign-in" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-                <li><a class='fa fa-user-plus' href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                <li><a class="fa fa-sign-in" href="{% url 'account_login'%}?next={{request.path}}">Login</a></li>
+                <li><a class='fa fa-user-plus' href="{% url 'account_login'%}?next={{request.path}}">Sign in</a></li>
               {% endif %}
  
               <li class="divider"></li>
@@ -51,6 +51,13 @@
         <li>
             <a href="{% url 'schedules_index' %}">Reservas</a>
         </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'accounts:profile' %}"> Perfil</a>
+        </li>
+
+        {% endif %}
+
         <!-- Add user link + Log in , and offsprings + assignments-->
         <!-- Help drowpdown -->
         <li class="dropdown">
@@ -60,7 +67,7 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="{% url 'index' %}">Principal</a>
+                <a href="{% url 'home' %}">Principal</a>
               </li>
                 <li>
                 <a href="{% url 'help' %}">Ayuda</a>

@@ -4,11 +4,13 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def index(request):
-    return render(request, 'pages/index.html')
+def home(request):
+    return render(request, 'pages/home.html')
+
 
 def about(request):
     return render(request, 'pages/about.html')
+
 
 def help(request):
     return render(request, 'pages/help.html')

@@ -7,4 +7,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
     phone = PhoneNumberField(null=True, blank=False)
+
     pass
+
+    def __str__(self):
+        return self.get_full_name()
