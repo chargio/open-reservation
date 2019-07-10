@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Catecúmenos{% endblock %}
+{% block content %}
+  <div class="container-fluid">
+      <h1>Catecúmenos: {{ object_list.count }}</h1>
+      <div class="list-group list-view-pf list-view-pf-view">
+        {% for offspring in object_list %}
+          <div class="list-group-item">
+            <div class="list-view-pf-main-info">
+              <div class="list-view-pf-left">
+                <span class="fa fa-user list-view-pf-icon-sm"></span>
+              </div>
+              <div class="list-view-pf-body">
+                <div class="list-view-pf-description">
+                  <div class="list-group-item-heading">
+                    {{ offspring.first_name}}
+                  </div>
+                  <div class="list-group-item-text">
+                    TODO No assignment yet
+                  </div>
+                </div>
+                <div class="list-view-pf-additional-info">
+                  <div class="list-view-pf-additional-info-item">
+                    {{ offspring.get_grade_display}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+         <h1> No hay catecúmenos todavía</h1>
+        {% endfor %}
+      </div>
+  </div>
+{% endblock %}

@@ -10,5 +10,8 @@ class User(AbstractUser):
 
     pass
 
+    def offsprings_count(self,):
+        return self.offspring_set.count()
+
     def __str__(self):
         return self.get_full_name()

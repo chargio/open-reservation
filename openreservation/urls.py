@@ -22,4 +22,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('accounts.urls', namespace='user')),
     path('schedules/', include('schedules.urls')),
+    path('offsprings/', include('offsprings.urls')),
 ]
