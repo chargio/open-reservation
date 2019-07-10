@@ -13,7 +13,8 @@
               <div class="list-view-pf-body">
                 <div class="list-view-pf-description">
                   <div class="list-group-item-heading">
-                    {{ offspring.first_name}}
+                    <h4><b>{{ offspring.first_name}}</b></h4>
+                    <p> {{ offspring.last_name}}</p>
                   </div>
                   <div class="list-group-item-text">
                     TODO No assignment yet
@@ -24,6 +25,10 @@
                     {{ offspring.get_grade_display}}
                   </div>
                 </div>
+                <div class="list-view-pf-actions">
+                    <a class="btn btn-primary" href="{% url 'offsprings:update' pk=offspring.id  %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'offsprings:delete' pk=offspring.id %}">Delete</a>
+                    </div>
               </div>
             </div>
           </div>

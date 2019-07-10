@@ -1,8 +1,9 @@
-# 
-# Overriding forms from allauth
+#
+# Overriding forms from allauth to use Patternfly
+#
+
 
 from allauth.account.forms import LoginForm
-from .models import User
 
 
 class MyCustomLoginForm(LoginForm):
