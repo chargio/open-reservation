@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.core.exceptions import ValidationError
 
 
 class Offspring(models.Model):
@@ -19,10 +20,6 @@ class Offspring(models.Model):
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
 
-    def same_last_name(self, lastname):
-        # Does it exist a parent?
-        parent = self.parent
-        # Find first sibling
-        sibling = parent.offspring_set.first()
-        # If sibling is not nil, return true if lasts names are the same
-        return sibling and sibling.last_name == self.last_name
+    def save(self, *args, **kwargs):
+        self.last_name = self.parent.offsprings_surname
+        super().save(*args, **kwargs)
