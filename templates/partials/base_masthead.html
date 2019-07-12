@@ -62,7 +62,7 @@
 
         {% else %}
         <li><a href="{% url 'account_login'%}?next={{request.path}}">Login</a></li>
-        <li><a href="#">Darse de alta</a></li>
+        <li><a href="{% url 'account_signup' %}">Darse de alta</a></li>
 
         {% endif %}
 

@@ -161,7 +161,6 @@ AUTH_USER_MODEL = "accounts.User"
 
 
 # Configuration for all-auth
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -171,7 +170,18 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+
+
+if PRODUCTION:
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
 SITE_ID = 7
+
+
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -184,3 +194,10 @@ LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 
 ACCOUNT_FORMS = {'login': 'accounts.forms.MyCustomLoginForm'}
+
+EMAIL_HOST=os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST_USER= os.environ.get('EMAIL_USER', 'test@test.com')
+EMAIL_HOST_PASSWORD= os.environ.get('EMAIL_PASSWORD', 'password')
+EMAIL_PORT= os.environ.get('EMAIL_PORT', 587)
+EMAIL_USER_TLS=True
+DEFAULT_FROM_EMAIL= os.environ.get('EMAIL_DEFAULT_FROM', 'test@test.com')
