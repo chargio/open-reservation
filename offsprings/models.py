@@ -1,6 +1,5 @@
 from django.db import models
 from accounts.models import User
-from django.core.exceptions import ValidationError
 
 
 class Offspring(models.Model):

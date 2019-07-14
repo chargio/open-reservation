@@ -4,6 +4,8 @@
 
 
 from allauth.account.forms import LoginForm
+from django.contrib.auth import get_user_model
+from django.forms import ModelForm
 
 
 class MyCustomLoginForm(LoginForm):
@@ -17,3 +19,18 @@ class MyCustomLoginForm(LoginForm):
             {'class': 'form-control  input-lg'})
         self.fields['password'].widget.attrs.update(
             {'class': 'form-control  input-lg'})
+
+
+class MyCustomSignupForm(ModelForm):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'password', 'first_name',
+                  'last_name', 'phone', 'offsprings_surname')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for f in self.fields:
+            self.fields[f].widget.attrs.update(
+                {'class': 'form-control  input-lg'})
