@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 
 class User(AbstractUser):
-    phone = PhoneNumberField(null=True, blank=False)
+    phone = PhoneNumberField(null=True, blank=False, verbose_name="teléfono")
     offsprings_surname = models.CharField(
         "apellidos de los catecúmenos",
         null=True,
