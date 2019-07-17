@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Is PRODUCTION set up in the environment?
-PRODUCTION = os.environ.get('PRODUCTION', False)
+PRODUCTION = True if os.environ.get('PRODUCTION') else False
+
 
 # IF the environment variable is production, make sure that config is through environment variables and not by default,
 # Also disables debug by default
@@ -182,11 +183,14 @@ else:
 SITE_ID = 7
 
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SESSION_REMEMBER = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
@@ -200,3 +204,5 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'password')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USER_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM', 'test@test.com')
+
+PHONENUMBER_DEFAULT_REGION = "ES"
