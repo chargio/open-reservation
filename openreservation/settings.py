@@ -203,7 +203,7 @@ EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER', 'test@test.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'password')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
-EMAIL_USER_TLS = True
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM', 'test@test.com')
 
 PHONENUMBER_DEFAULT_REGION = "ES"
