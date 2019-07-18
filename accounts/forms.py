@@ -3,11 +3,8 @@
 #
 
 
-from allauth.account.forms import LoginForm, SignupForm
+from allauth.account.forms import LoginForm
 from django.contrib.auth import get_user_model
-from django.forms import ModelForm
-from django import forms
-from allauth.account.forms import SetPasswordField
 from django.contrib.auth.forms import UserCreationForm
 
 

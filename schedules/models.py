@@ -43,3 +43,6 @@ class Schedule(models.Model):
             self.start_time,
             (datetime.combine(datetime.today(), self.start_time) + self.duration).time()
         )
+
+    def seats_available(self):
+        return self.room.capacity - self.seats_reserved - self.offspring_set.count()

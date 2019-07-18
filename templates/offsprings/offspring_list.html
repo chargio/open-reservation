@@ -17,7 +17,12 @@
                     <p> {{ offspring.last_name}}</p>
                   </div>
                   <div class="list-group-item-text">
-                    TODO No assignment yet
+                    {% if offspring.assignment %}
+                      
+                      <span class="label label-info">{{ offspring.assignment }}</span>
+                    {% else %}
+                    <a href="{% url 'offsprings:assign' pk=offspring.id %}">No tiene grupo asignado todavía</a>
+                    {% endif %}
                   </div>
                 </div>
                 <div class="list-view-pf-additional-info">
@@ -26,8 +31,10 @@
                   </div>
                 </div>
                 <div class="list-view-pf-actions">
-                    <a class="btn btn-primary" href="{% url 'offsprings:update' pk=offspring.id  %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'offsprings:delete' pk=offspring.id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'offsprings:update' pk=offspring.id  %}">Actualizar</a>
+                    <a class="btn btn-danger" href="{% url 'offsprings:delete' pk=offspring.id %}">Borrar</a>
+                    <a class="btn btn-warning" href="{% url 'offsprings:assign' pk=offspring.id %}">Asignar grupo</a>
+
                     </div>
               </div>
             </div>

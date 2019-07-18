@@ -10,7 +10,7 @@ class OffspringInline(admin.TabularInline):
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'first_name', 'last_name',
-                    'email', 'phone', 'offsprings_surname', 'offsprings_count')
+                    'email', 'phone', 'offsprings_surname', 'offsprings_count', 'has_usable_password',)
     list_display_links = ('id', 'first_name', 'last_name', 'email',)
 
     inlines = [

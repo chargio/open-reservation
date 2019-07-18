@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from schedules.models import Schedule
 
 
 class Offspring(models.Model):
@@ -15,6 +16,9 @@ class Offspring(models.Model):
     grade = models.IntegerField("curso", choices=GRADES, default=1)
     parent = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="padre o tutor")
+
+    assignment = models.ForeignKey(
+        Schedule, on_delete=models.SET_NULL, verbose_name="turno", null=True, default=None)
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
