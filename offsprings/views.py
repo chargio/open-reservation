@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from offsprings.forms import CreateOffspringForm
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 
 # Show the Offspring of the user that is making the petition, and not more
@@ -33,16 +34,22 @@ class OffspringCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class OffspringUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Offspring
-    fields = ['first_name']
+    fields = ['first_name', 'birth_date', 'home_address', 'school', 'baptized']
     success_message = "%(first_name)s se actualizó con éxito"
     success_url = reverse_lazy('offsprings:index')
     template_name_suffix = '_update_form'
+
+    def get_object(self):
+        return get_object_or_404(Offspring, pk=self.kwargs['pk'], parent=self.request.user)
 
 
 class OffspringDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Offspring
     success_message = "%(first_name)s se borró con éxito"
     success_url = reverse_lazy('offsprings:index')
+
+    def get_object(self):
+        return get_object_or_404(Offspring, pk=self.kwargs['pk'], parent=self.request.user)
 
 
 class OffspringAssignmentNew(LoginRequiredMixin, SuccessMessageMixin, TemplateView):

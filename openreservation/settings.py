@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'schedules',
     'accounts',
     'offsprings',
-    'assignments',
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import User
 from schedules.models import Schedule
+import datetime
 
 
 class Offspring(models.Model):
@@ -20,9 +21,22 @@ class Offspring(models.Model):
     assignment = models.ForeignKey(
         Schedule, on_delete=models.SET_NULL, verbose_name="turno", null=True, default=None)
 
+    birth_date = models.DateField(
+        "fecha de nacimiento", default=datetime.date.today)
+    school = models.CharField("colegio", max_length=150, default="Las Tablas")
+    home_address = models.CharField(
+        "colegio", max_length=150, default="Mi casa")
+    baptized = models.BooleanField("bautizado", default=True)
+    father_name = models.CharField(
+        "nombre completo del padre", max_length=150, default="padre")
+    mother_name = models.CharField(
+        "nombre completo de la madre", max_length=150, default="madre")
+
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
 
     def save(self, *args, **kwargs):
         self.last_name = self.parent.offsprings_surname
+        self.father_name = self.parent.father_name
+        self.mother_name = self.parent.mother_name
         super().save(*args, **kwargs)

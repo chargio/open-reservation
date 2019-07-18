@@ -15,6 +15,10 @@ class User(AbstractUser):
         blank=False,
         max_length=150,
     )
+    father_name = models.CharField(
+        "nombre completo del padre", max_length=150, default="padre")
+    mother_name = models.CharField(
+        "nombre completo de la madre", max_length=150, default="madre")
     pass
 
     def offsprings_count(self,):

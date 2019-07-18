@@ -6,7 +6,8 @@ from offsprings.models import Offspring
 class CreateOffspringForm(ModelForm):
     class Meta:
         model = Offspring
-        fields = ['first_name', 'grade']
+        fields = ['first_name', 'birth_date',
+                  'home_address', 'school', 'baptized']
 
     def clean_grade(self):
         grade = self.cleaned_data['grade']
