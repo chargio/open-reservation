@@ -25,7 +25,7 @@ class Offspring(models.Model):
         "fecha de nacimiento", default=datetime.date.today)
     school = models.CharField("colegio", max_length=150, default="Las Tablas")
     home_address = models.CharField(
-        "colegio", max_length=150, default="Mi casa")
+        "dirección", max_length=150, default="Mi casa")
     baptized = models.BooleanField("bautizado", default=True)
     father_name = models.CharField(
         "nombre completo del padre", max_length=150, default="padre")
