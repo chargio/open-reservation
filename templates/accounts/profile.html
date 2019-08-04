@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container-fluid">
     <h1> {{ user }} </h1>
 
     <form class="form-horizontal">
@@ -23,8 +23,6 @@
           </div>
       </div>
 
-
-  
 
       <div class="form-group">
           <div class="col-sm-2 control-label">Teléfono:</div>
@@ -57,6 +55,10 @@
 
     </form>
     
+    <form action="{% url 'accounts:delete' user.id  %}" method='get'>
+      <button type='submit' class="btn btn-danger"> Borrar Perfil</button>
+      </form>
+
     
 </div>
 

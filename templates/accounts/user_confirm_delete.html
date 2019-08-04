@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1> Borrar perfil
+</h1>
+<form action="{% url 'accounts:delete' user.id  %}" method='post'>
+  <p> ¿Está seguro de que quiere borrar su perfil completamente,  {{ user }}?</p>
+    <p> Esta acción no se puede deshacer</p>
+  <button type='submit' class="btn btn-danger"> Borrar Perfil</button>
+  </form>
+
+{% endblock content %}
