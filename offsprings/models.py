@@ -23,14 +23,14 @@ class Offspring(models.Model):
 
     birth_date = models.DateField(
         "fecha de nacimiento", default=datetime.date.today)
-    school = models.CharField("colegio", max_length=150, default="Las Tablas")
+    school = models.CharField("colegio", max_length=150, default="Nombre del colegio")
     home_address = models.CharField(
-        "dirección", max_length=150, default="Mi casa")
+        "dirección", max_length=150, default="Dirección completa de la casa del catecúmeno")
     baptized = models.BooleanField("bautizado", default=True)
     father_name = models.CharField(
-        "nombre completo del padre", max_length=150, default="padre")
+        "nombre completo del padre", max_length=150, default="nombre completo del padre")
     mother_name = models.CharField(
-        "nombre completo de la madre", max_length=150, default="madre")
+        "nombre completo de la madre", max_length=150, default="nombre completo de la madre")
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)

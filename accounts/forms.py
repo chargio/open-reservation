@@ -26,7 +26,7 @@ class MyCustomSignupForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ('first_name',
-                  'last_name', 'phone', 'offsprings_surname', 'email')
+                  'last_name', 'phone', 'offsprings_surname', 'email', 'father_name', 'mother_name')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

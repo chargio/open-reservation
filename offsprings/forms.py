@@ -4,10 +4,15 @@ from offsprings.models import Offspring
 
 
 class CreateOffspringForm(ModelForm):
+    
     class Meta:
+        BIRTH_YEAR_CHOICES = ['2013', '2012', '2014']
         model = Offspring
-        fields = ['first_name', 'birth_date',
-                  'home_address', 'school', 'baptized']
+        fields = ['first_name', 'birth_date', 'grade',
+                  'home_address', 'school', 'baptized',]
+        widgets = {
+            'birth_date': forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
+        }
 
     def clean_grade(self):
         grade = self.cleaned_data['grade']

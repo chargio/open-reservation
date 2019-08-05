@@ -4,6 +4,11 @@
 
 {% regroup schedules by room as room_list %}
 
+<h1><b>Horarios</b></h1>
+
+{% if user.is_authenticated %}
+  <h2> Para asignar un horario a un catecúmeno visite <a href="{% url 'offsprings:index' %}">Catecúmenos</a></h2>
+{% endif %}
 
 {% for room in room_list %}
   <div class="col-xs-12">
