@@ -16,10 +16,14 @@
                     <h4><b>{{ offspring.first_name}}</b></h4>
                     <p> {{ offspring.last_name}}</p>
                   </div>
-                  <div class="list-group-item-text">
+                  <div class="list-view-pf-additional-info">
+                     <span class="label label-info">{{ offspring.assignment }}</span></div>
+                 
+                  <div class="list-group-item">
                     {% if offspring.assignment %}
                       
-                      <span class="label label-info">{{ offspring.assignment }}</span>
+                      
+                      {{ offspring.assignment.room }}
                     {% else %}
                     <a href="{% url 'offsprings:assign' pk=offspring.id %}">No tiene grupo asignado todavía</a>
                     {% endif %}
@@ -31,7 +35,7 @@
                   </div>
                 </div>
                 <div class="list-view-pf-actions">
-                    <a class="btn btn-primary" href="{% url 'offsprings:update' pk=offspring.id  %}">Actualizar</a>
+                    <a class="btn btn-primary" href="{% url 'offsprings:update' pk=offspring.id  %}">Editar datos</a>
                     <a class="btn btn-danger" href="{% url 'offsprings:delete' pk=offspring.id %}">Borrar</a>
                     <a class="btn btn-warning" href="{% url 'offsprings:assign' pk=offspring.id %}">Asignar grupo</a>
 

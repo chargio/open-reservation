@@ -16,7 +16,7 @@ class OffspringListView(LoginRequiredMixin, ListView):
     model = Offspring
 
     def get_queryset(self):
-        return Offspring.objects.filter(parent=self.request.user)
+        return Offspring.objects.filter(parent=self.request.user).order_by("id")
 
 
 class OffspringCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
