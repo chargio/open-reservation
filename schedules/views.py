@@ -10,7 +10,7 @@ from django.db.models import Value
 
 
 def index(request):
-    schedules = Schedule.objects.order_by('room', 'day_of_week').all()
+    schedules = Schedule.objects.order_by('day_of_week', 'room').all()
     used_days_of_week = Schedule.objects.values(
         "day_of_week").order_by("day_of_week").distinct()
     all_days_of_week = Schedule.DAYS_OF_WEEK

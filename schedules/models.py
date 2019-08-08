@@ -46,3 +46,8 @@ class Schedule(models.Model):
 
     def seats_available(self):
         return self.room.capacity - self.seats_reserved - self.offspring_set.count()
+
+    def get_printable_day_of_week(self):
+        return self.DAYS_OF_WEEK[self.day_of_week]
+
+    printable_day_of_week = property(get_printable_day_of_week)
