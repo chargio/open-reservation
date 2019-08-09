@@ -12,7 +12,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 class ScheduleAdmin(admin.ModelAdmin):
     list_display = ('id', '__str__', 'room', 'day_of_week', 'start_time',
-                    'duration', 'seats_reserved',)
+                    'duration', 'seats_reserved', 'seats_available')
     list_display_links = ('id', '__str__',)
     list_filter = ('room', 'day_of_week', 'start_time',)
     list_editable = ('duration', 'seats_reserved',)

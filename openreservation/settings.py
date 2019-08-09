@@ -200,11 +200,11 @@ ACCOUNT_FORMS = {'login': 'accounts.forms.MyCustomLoginForm',
                  'signup': 'accounts.forms.MyCustomSignupForm'}
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER', 'test@test.com')
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER', 'email_user@test.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'password')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM', 'test@test.com')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM', EMAIL_HOST_USER)
 
 PHONENUMBER_DEFAULT_REGION = "ES"
 

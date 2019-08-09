@@ -9,6 +9,8 @@ from offsprings.forms import CreateOffspringForm
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Show the Offspring of the user that is making the petition, and not more
@@ -101,6 +103,36 @@ class OffspringAssignmentCreate(LoginRequiredMixin, SuccessMessageMixin, Process
             offspring.save()
             messages.success(
                 request, f"Se asignó con éxito { offspring } a {schedule}")
+
+            # Sending email
+
+            # Recipient is the list of emails associated to the user (email + additional ones)
+
+            recipient_list = [request.user.email] + \
+                list(request.user.emailaddress_set.all())
+
+            subject = f"Se asignó {offspring} a {schedule}"
+            message = f"""
+                Estimado {request.user},
+                Gracias por utilizar la aplicación de catequesis.
+
+                Este mensaje es para informarle de que se ha asignado a {offspring} al grupo {schedule}, en el aula {schedule.room}.
+
+                El siguiente paso será acercarse a la parroquia la segunda semana de Septiembre para terminar la inscripción.
+
+                Unidos en Cristo,
+                Ignacio Andreu,
+                Párroco de la parroquia de Las Tablas (Santa María Soledad Torres Acosta)
+
+                """
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=recipient_list,
+                fail_silently=True,
+            )
+
         else:
             messages.error(request, "No ha sido posible asignar el turno")
 
