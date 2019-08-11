@@ -96,9 +96,9 @@ class OffspringAssignmentCreate(LoginRequiredMixin, SuccessMessageMixin, Process
 
             # Sending email
 
-            # Recipient is the list of emails associated to the user (email + additional ones)
+            # Recipient is the list of emails associated to the user, only the email
 
-            recipient_list = list(request.user.emailaddress_set.all())
+            recipient_list  = [x.email for x in request.user.emailaddress_set.all()]
 
             subject = f"Se asignó {offspring} a {schedule}"
             message = f"""
