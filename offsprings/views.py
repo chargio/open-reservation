@@ -66,24 +66,14 @@ class OffspringAssignmentNew(LoginRequiredMixin, SuccessMessageMixin, TemplateVi
         offspring = Offspring.objects.get(
             id=self.kwargs['pk'], parent=self.request.user)
 
-        schedules = Schedule.objects.order_by('room', 'day_of_week').all()
-        used_days_of_week = Schedule.objects.values(
-            "day_of_week").order_by("day_of_week").distinct()
-        all_days_of_week = Schedule.DAYS_OF_WEEK
-        used_starting_times = Schedule.objects.values(
-            "start_time").order_by("start_time").distinct()
+        schedules = Schedule.objects.order_by('day_of_week', 'room').all()
+
 
         # from django.db.models import Count
         # schedules.objects.anotate(reserved=Count('assignments'))
 
-        # pdb.set_trace()
-        for x in used_days_of_week:
-            x['display_name'] = all_days_of_week[x['day_of_week']][1]
-
         context = {
             'schedules': schedules,
-            'used_days_of_week': used_days_of_week,
-            'used_starting_times': used_starting_times,
             'offspring': offspring,
         }
         return context
@@ -106,10 +96,9 @@ class OffspringAssignmentCreate(LoginRequiredMixin, SuccessMessageMixin, Process
 
             # Sending email
 
-            # Recipient is the list of emails associated to the user (email + additional ones)
+            # Recipient is the list of emails associated to the user, only the email
 
-            recipient_list = [request.user.email] + \
-                list(request.user.emailaddress_set.all())
+            recipient_list  = [x.email for x in request.user.emailaddress_set.all()]
 
             subject = f"Se asignó {offspring} a {schedule}"
             message = f"""
@@ -125,13 +114,14 @@ class OffspringAssignmentCreate(LoginRequiredMixin, SuccessMessageMixin, Process
                 Párroco de la parroquia de Las Tablas (Santa María Soledad Torres Acosta)
 
                 """
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=recipient_list,
-                fail_silently=True,
-            )
+            if subject and message and recipient_list:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=recipient_list,
+                    fail_silently=True,
+                )
 
         else:
             messages.error(request, "No ha sido posible asignar el turno")
