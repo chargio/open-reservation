@@ -35,6 +35,11 @@ class User(AbstractUser):
             raise ValidationError(
                 {'email': ['El email no es válido o está repetido', ]})
 
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    full_name = property(get_full_name)
+
 
 @receiver(pre_save, sender=User)
 def populate_username(sender, instance, *args, **kwargs):

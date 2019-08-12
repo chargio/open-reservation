@@ -68,7 +68,6 @@ class OffspringAssignmentNew(LoginRequiredMixin, SuccessMessageMixin, TemplateVi
 
         schedules = Schedule.objects.order_by('day_of_week', 'room').all()
 
-
         # from django.db.models import Count
         # schedules.objects.anotate(reserved=Count('assignments'))
 
@@ -98,16 +97,17 @@ class OffspringAssignmentCreate(LoginRequiredMixin, SuccessMessageMixin, Process
 
             # Recipient is the list of emails associated to the user, only the email
 
-            recipient_list  = [x.email for x in request.user.emailaddress_set.all()]
+            recipient_list = [
+                x.email for x in request.user.emailaddress_set.all()]
 
             subject = f"Se asignó {offspring} a {schedule}"
             message = f"""
-                Estimado {request.user},
+                Estimado {request.user.full_name},
                 Gracias por utilizar la aplicación de catequesis.
 
                 Este mensaje es para informarle de que se ha asignado a {offspring} al grupo {schedule}, en el aula {schedule.room}.
 
-                El siguiente paso será acercarse a la parroquia la segunda semana de Septiembre para terminar la inscripción.
+                El siguiente paso será acercarse a la parroquia la semana del 9 al 13 de Septiembre en horario de despacho para terminar la inscripción.
 
                 Unidos en Cristo,
                 Ignacio Andreu,

@@ -11,15 +11,6 @@ class Room(models.Model):
 
 
 class Schedule(models.Model):
-    # DAY_OF_THE_WEEK = {
-    #    '1': _(u'Monday'),
-    #    '2': _(u'Tuesday'),
-    #    '3': _(u'Wednesday'),
-    #    '4': _(u'Thursday'),
-    #    '5': _(u'Friday'),
-    #    '6': _(u'Saturday'),
-    #    '7': _(u'Sunday'),
-    # }
     DAYS_OF_WEEK = [
         (0, 'Lunes'),
         (1, 'Martes'),
