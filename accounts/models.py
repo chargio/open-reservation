@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -25,7 +26,14 @@ class User(AbstractUser):
         return self.offspring_set.count()
 
     def __str__(self):
-        return self.get_full_name()
+        return f"{self.get_full_name()} <{self.email}>"
+
+    def validate_unique(self, *args, **kwargs):
+        super(User, self).validate_unique(*args, **kwargs)
+        qs = User.objects.filter(email=self.email)
+        if qs.exists():
+            raise ValidationError(
+                {'email': ['El email no es válido o está repetido', ]})
 
 
 @receiver(pre_save, sender=User)
