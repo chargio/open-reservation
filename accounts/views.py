@@ -6,6 +6,7 @@ from accounts.models import User
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
+
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     def get(self, request):
         return render(request, 'accounts/profile.html', {'user': self.request.user})
