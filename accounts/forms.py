@@ -7,6 +7,17 @@ from django.contrib.auth import get_user_model
 from django import forms
 from allauth.account.forms import LoginForm
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.utils import ErrorList
+
+
+class BootstrapErrorList(ErrorList):
+    def as_divs(self):
+        if not self:
+            return ''
+        return '%s' % ''.join(['<div class="alert alert-danger">%s</div>' % e for e in self])
+
+    def __str__(self):
+        return self.as_divs()
 
 
 class MyCustomLoginForm(LoginForm):
@@ -23,8 +34,11 @@ class MyCustomLoginForm(LoginForm):
 
 
 class MyCustomSignupForm(UserCreationForm):
+    error_css_class = 'has-error'
+
     class Meta:
         model = get_user_model()
+
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control input-lg'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control input-lg'}),
@@ -41,7 +55,9 @@ class MyCustomSignupForm(UserCreationForm):
                   'last_name', 'phone', 'offsprings_surname', 'email', 'father_name', 'mother_name')
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        new_kwargs = {'error_class': BootstrapErrorList}
+        new_kwargs.update(kwargs)
+        super().__init__(*args, **new_kwargs)
         self.fields['password1'].widget.attrs.update(
             {'class': 'form-control  input-lg'}
         )
