@@ -29,7 +29,8 @@ class Schedule(models.Model):
         default=0)
 
     def __str__(self):
-        return "%s: %s - %s" % (
+        return "%s, %s: %s - %s" % (
+            self.room.name,
             self.get_day_of_week_display(),
             self.start_time,
             (datetime.combine(datetime.today(), self.start_time) + self.duration).time()
